@@ -1,7 +1,7 @@
-function OutputDescription () {
-    return (
-        <h2 className="col"></h2>
-)
+function OutputDescription(props) {
+  const { resultsDescription } = props;
+
+  return <h2 className="col">{resultsDescription}</h2>;
 }
 
 export default OutputDescription;
