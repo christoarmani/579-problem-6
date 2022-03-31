@@ -63,9 +63,9 @@ function App() {
   return (
     <main className="container">
       <h1 className="row">Rhyme Finder (579 Problem Set 6)</h1>
-      <h2>Your github code goes here</h2>
+      <h5><a href="https://github.com/christoarmani/579-problem-6/tree/master">Link to Github</a></h5>
       <div className="row">
-        <div className="col">Saved words: {savedWordsArray.length ? savedWordsArray.join(", ") : "none" }</div>
+        <div className="col">Saved words: {savedWordsArray.length ? savedWordsArray.join(", ") : "(none)" }</div>
       </div>
       <div className="row">
         <InputGroup
