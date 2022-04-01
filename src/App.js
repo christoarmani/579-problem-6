@@ -8,6 +8,7 @@ import WordOutput from "./components/WordOutput";
 import { useState } from "react";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [savedWordsArray, setSavedWordsArray] = useState([]);
   const [dataMuseResults, setDataMuseResults] = useState([]);
@@ -21,7 +22,7 @@ function App() {
   };
 
   const ShowRhymes = () => {
-    setResultsDescription("...loading");
+    setIsLoading(true);
     setDataMuseResults([]);
     fetch(
       `https://api.datamuse.com/words?${new URLSearchParams({
@@ -31,6 +32,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => {
         if (json.length) {
+          setIsLoading(false);
           setDataMuseResults(json);
           setResultsDescription(`Words that rhyme with ${inputValue}`);
           setIsNoResult(false);
@@ -41,7 +43,7 @@ function App() {
   };
 
   const ShowSynonyms = () => {
-    setResultsDescription("...loading");
+    setIsLoading(true);
     setDataMuseResults([]);
     fetch(
       `https://api.datamuse.com/words?${new URLSearchParams({
@@ -51,6 +53,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => {
         if (json.length) {
+          setIsLoading(false);
           setDataMuseResults(json);
           setResultsDescription(`Words with a meaning similar to ${inputValue}`);
           setIsNoResult(false);
@@ -80,7 +83,10 @@ function App() {
       {isNoResult ? ("(no results)") : (
         <div>
           <div className="row">
-            <OutputDescription resultsDescription={resultsDescription} />
+            <OutputDescription
+            resultsDescription={resultsDescription}
+            isLoading={isLoading}
+            />
           </div>
           <div className="output row">
             <WordOutput
